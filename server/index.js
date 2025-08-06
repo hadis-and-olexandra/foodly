@@ -18,6 +18,19 @@ app.get('/api/home', (req, res) => {
   res.json({ message: 'Hello from backend!' });
 });
 app.use('/api/auth', authRoutes);
+//
+import userRoutes from './routes/userRoutes.js';
+app.use('/api/users', userRoutes);
+
+//// Import food routes
+import foodRoutes from './routes/foodRoutes.js';
+app.use('/api/foods', foodRoutes);
+
+// Import order routes
+import orderRoutes from './routes/orderRoutes.js';
+app.use('/api/orders', orderRoutes);
+
+
 
 
 // MongoDB Connection
