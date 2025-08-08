@@ -39,3 +39,13 @@ export const createFood = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+// GET /api/foods
+export const getFoods = async (req, res) => {
+  try {
+    const foods = await Food.find().populate('createdBy', 'name email');
+    res.json(foods);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch foods' });
+  }
+};

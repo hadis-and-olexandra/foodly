@@ -30,6 +30,10 @@ app.use('/api/foods', foodRoutes);
 import orderRoutes from './routes/orderRoutes.js';
 app.use('/api/orders', orderRoutes);
 
+// import comment routes
+import commentRoutes from './routes/commentRoutes.js';
+app.use('/api/comments', commentRoutes);
+
 
 
 
@@ -42,3 +46,4 @@ mongoose.connect(process.env.MONGO_URI)
 .catch(err => {
   console.error('❌ MongoDB connection error:', err);
 });
+
