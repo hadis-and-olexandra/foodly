@@ -12,7 +12,6 @@ export const createOrder = async (req, res) => {
     let totalPrice = 0;
     const validatedItems = [];
 
-    // بررسی و محاسبه قیمت کل
     for (const item of foodItems) {
       const food = await Food.findById(item.food);
       if (!food) {
@@ -31,7 +30,7 @@ export const createOrder = async (req, res) => {
     console.log('req.user:', req.user);
 
     const order = new Order({
-      user: req.user.id, // از middleware میاد
+      user: req.user.id, 
       foodItems: validatedItems,
       totalPrice: totalPrice
     });

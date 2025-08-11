@@ -34,7 +34,13 @@ app.use('/api/orders', orderRoutes);
 import commentRoutes from './routes/commentRoutes.js';
 app.use('/api/comments', commentRoutes);
 
+// Import customer routes
+import customerRoutes from './routes/customerRoutes.js';
+app.use('/api/customers', customerRoutes);
 
+// Import chef routes
+import chefRoutes from './routes/chefRoutes.js';
+app.use('/api/chef', chefRoutes);
 
 
 // MongoDB Connection

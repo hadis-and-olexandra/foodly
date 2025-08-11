@@ -1,5 +1,5 @@
 import express from 'express';
-import { createComment, getCommentsByFood, deleteComment ,updateComment ,replyToComment,deleteReply,getCommentsWithReplies } from '../controllers/commentController.js';
+import { createComment, getCommentsByFood, deleteComment ,updateComment ,replyToComment,deleteReply,getCommentsWithReplies,updateReply } from '../controllers/commentController.js';
 import { authMiddleware, allowRoles } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
@@ -25,5 +25,7 @@ router.delete('/reply/:commentId', authMiddleware, allowRoles('chef'), deleteRep
 // GET /api/comments/with-replies/:foodId
 router.get('/with-replies/:foodId', getCommentsWithReplies);
 
+// PUT /api/comments/reply/:replyId
+router.put('/reply/:replyId', authMiddleware, allowRoles('chef'), updateReply);
 
 export default router;

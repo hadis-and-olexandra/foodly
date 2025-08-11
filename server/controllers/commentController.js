@@ -48,9 +48,11 @@ export const deleteComment = async (req, res) => {
     if (comment.user.toString() !== req.user.id.toString()) {
       return res.status(403).json({ message: 'You can only delete your own comments' });
     }
-
+    if (!comment.parentComment) {
+      await Comment.deleteMany({ parentComment: commentId });
+    }
     await comment.deleteOne();
-    res.json({ message: 'Comment deleted successfully' });
+    res.json({ message: 'Comment and its replies deleted successfully' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Failed to delete comment' });
@@ -122,7 +124,7 @@ export const deleteReply = async (req, res) => {
   try {
     const { commentId } = req.params;
     const userId = req.user.id;
-
+    console.log('Deleting reply with ID:', commentId);
     const comment = await Comment.findById(commentId);
     if (!comment) {
       return res.status(404).json({ message: 'Reply not found' });
@@ -132,9 +134,10 @@ export const deleteReply = async (req, res) => {
       return res.status(400).json({ message: 'This is not a reply comment' });
     }
 
-    if (comment.user.toString() !== userId.toString()) {
-      return res.status(403).json({ message: 'You can only delete your own replies' });
+    if (req.user.role !== 'chef' || comment.user.toString() !== userId.toString()) {
+      return res.status(403).json({ message: 'Access denied: only the author chef can delete this reply' });
     }
+
 
     await comment.deleteOne();
     res.json({ message: 'Reply deleted successfully' });
@@ -189,5 +192,40 @@ export const getCommentsWithReplies = async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch comments with replies' });
   }
 };
+
+// PUT /api/comments/reply/:replyId
+// Update a reply
+export const updateReply = async (req, res) => {
+  try {
+    const { replyId } = req.params;
+    const { text } = req.body;
+    const userId = req.user.id;
+
+    const reply = await Comment.findById(replyId);
+
+    if (!reply) {
+      return res.status(404).json({ message: 'Reply not found' });
+    }
+
+    if (!reply.parentComment) {
+      return res.status(400).json({ message: 'This comment is not a reply' });
+    }
+
+   
+    if (req.user.role !== 'chef' || reply.user.toString() !== userId.toString()) {
+      return res.status(403).json({ message: 'Access denied: only the chef who posted the reply can edit it' });
+    }
+
+    reply.text = text;
+    await reply.save();
+
+    res.json({ message: 'Reply updated successfully', reply });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to update reply' });
+  }
+};
+
 
 
