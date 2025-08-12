@@ -1,4 +1,5 @@
 import Comment from '../models/Comment.js';
+import { recomputeFoodRating } from '../utils/recomputeFoodRating.js';
 // POST /api/comments
 // Create a new comment
 // Only customers can create comments
@@ -16,6 +17,10 @@ export const createComment = async (req, res) => {
     });
 
     await newComment.save();
+    if (!newComment.parentComment) {
+      await recomputeFoodRating(newComment.food.toString());
+    }
+
 
     res.status(201).json({ message: 'Comment added', comment: newComment });
   } catch (err) {
@@ -52,6 +57,10 @@ export const deleteComment = async (req, res) => {
       await Comment.deleteMany({ parentComment: commentId });
     }
     await comment.deleteOne();
+    if (isParent) {
+      await recomputeFoodRating(foodId);
+      return res.json({ message: 'Comment and its replies deleted successfully' });
+    }
     res.json({ message: 'Comment and its replies deleted successfully' });
   } catch (err) {
     console.error(err);
@@ -80,6 +89,9 @@ export const updateComment = async (req, res) => {
     if (rating) comment.rating = rating;
 
     await comment.save();
+    if (wasParent) {
+      await recomputeFoodRating(comment.food.toString());
+    }
 
     res.json({ message: 'Comment updated successfully', comment });
   } catch (err) {

@@ -22,6 +22,14 @@ const foodSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  averageRating: { 
+    type: Number, 
+    default: 0 
+  },
+  ratingsCount: { 
+    type: Number, 
+    default: 0 
+  },
   image: {
     type: String, // URL to the image
     default: ''   // 
