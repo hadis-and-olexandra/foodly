@@ -27,15 +27,25 @@ export const register = async (req, res) => {
     await newUser.save();
 
     //  JWT
-    const token = jwt.sign(
-      { id: newUser._id, role: newUser.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
+    // const token = jwt.sign(
+    //   { id: newUser._id, role: newUser.role },
+    //   process.env.JWT_SECRET,
+    //   { expiresIn: '7d' }
+    // );
 
-    res.status(201).json({
+    // res.status(201).json({
+    //   message: 'User created successfully',
+    //   token,
+    //   user: {
+    //     id: newUser._id,
+    //     name: newUser.name,
+    //     email: newUser.email,
+    //     role: newUser.role
+    //   }
+    // });
+
+     res.status(201).json({
       message: 'User created successfully',
-      token,
       user: {
         id: newUser._id,
         name: newUser.name,

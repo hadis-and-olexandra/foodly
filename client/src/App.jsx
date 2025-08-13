@@ -1,21 +1,101 @@
-import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import ChefsCatalog from "./pages/ChefsCatalog";
+import ChefDetails from "./pages/ChefDetails";
+import DishDetails from "./pages/DishDetails";
+import Checkout from "./pages/Checkout";
+import AIAssistant from "./pages/AIAssistant";
+import DashboardCustomer from "./pages/customer/DashboardCustomer";
+import SettingsCustomer from "./pages/customer/SettingsCustomer";
+import DashboardChef from "./pages/chef/Dashboard";
+import AddDish from "./pages/chef/AddDish";
+import OrdersChef from "./pages/chef/OrdersChef";
+import SettingsChef from "./pages/chef/SettingsChef";
+import Footer from "./components/Footer";
+import NotFound from "./pages/NotFound";
 import "./App.css";
 
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    fetch("http://localhost:5001/api/home")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch((error) => console.error("Error:", error));
-  }, []);
-
   return (
-    <div>
-      <h1>Message from backend:</h1>
-      <p>{message || "Loading..."}</p>
-    </div>
+    <BrowserRouter>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/signup" element={<SignUpPage />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/chefs" element={<ChefsCatalog />}></Route>
+            <Route path="/chefs/:chefId" element={<ChefDetails />}></Route>
+            <Route path="/dishes/:dishId" element={<DishDetails />}></Route>
+            <Route
+              path="/checkout"
+              element={
+                <ProtectedRoute allowedRoles={["customer"]}>
+                  <Checkout />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route path="/ai-assistant" element={<AIAssistant />}></Route>
+            <Route
+              path="/customer/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={["customer"]}>
+                  <DashboardCustomer />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route
+              path="/customer/settings"
+              element={
+                <ProtectedRoute allowedRoles={["customer"]}>
+                  <SettingsCustomer />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route
+              path="/chef/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={["chef"]}>
+                  <DashboardChef />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route
+              path="/chef/addDish"
+              element={
+                <ProtectedRoute allowedRoles={["chef"]}>
+                  <AddDish />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route
+              path="/chef/orders"
+              element={
+                <ProtectedRoute allowedRoles={["chef"]}>
+                  <OrdersChef />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route
+              path="/chef/settings"
+              element={
+                <ProtectedRoute allowedRoles={["chef"]}>
+                  <SettingsChef />
+                </ProtectedRoute>
+              }
+            ></Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
