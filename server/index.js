@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 dotenv.config(); // Load .env variables
 import authRoutes from './routes/authRoutes.js';
+import path from 'path';
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -41,6 +43,9 @@ app.use('/api/customers', customerRoutes);
 // Import chef routes
 import chefRoutes from './routes/chefRoutes.js';
 app.use('/api/chef', chefRoutes);
+
+// Serve static files from the React app
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 
 // MongoDB Connection
