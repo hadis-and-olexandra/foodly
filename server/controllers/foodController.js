@@ -108,3 +108,18 @@ export const getFoodsByCategory = async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch foods by category' });
   }
 };
+
+// GET /api/foods/country/:countryName
+export const getFoodsByCountry = async (req, res) => {
+  const { countryName } = req.params;
+
+  try {
+    const foods = await Food.find({ country: { $regex: new RegExp(`^${countryName}$`, 'i') } });
+
+
+    res.json(foods);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to fetch foods by country' });
+  }
+};
