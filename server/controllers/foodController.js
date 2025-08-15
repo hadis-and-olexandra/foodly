@@ -123,3 +123,23 @@ export const getFoodsByCountry = async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch foods by country' });
   }
 };
+// GET /api/foods/chefs-by-country/:country
+import User from '../models/User.js';
+
+export const getChefsByFoodCountry = async (req, res) => {
+  const { countryName } = req.params;
+
+  try {
+    const foods = await Food.find({ country: { $regex: new RegExp(`^${countryName}$`, 'i') } });
+console.log('Foods:', foods);
+
+    const chefIds = [...new Set(foods.map(food => food.createdBy.toString()))];
+    const chefs = await User.find({ _id: { $in: chefIds }, role: 'chef' }).select('-password');
+
+    res.json(chefs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to fetch chefs' });
+  }
+};
+

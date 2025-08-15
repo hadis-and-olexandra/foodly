@@ -1,5 +1,5 @@
 import express from 'express';
-import { createFood,getFoods,getFoodsByCategory,updateFoodImage,getFoodsByCountry  } from '../controllers/foodController.js';
+import { createFood,getFoods,getFoodsByCategory,updateFoodImage,getFoodsByCountry,getChefsByFoodCountry } from '../controllers/foodController.js';
 import { authMiddleware, allowRoles } from '../middlewares/authMiddleware.js';
 import { uploadFoodImage } from '../middlewares/upload.js';
 
@@ -16,6 +16,8 @@ router.get('/', getFoods);
 
 router.get('/category/:category', getFoodsByCategory);
 router.get('/country/:countryName', getFoodsByCountry);
+router.get('/chefs-by-country/:countryName', getChefsByFoodCountry);
+
 
 
 export default router;
