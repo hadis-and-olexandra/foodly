@@ -4,12 +4,15 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 dotenv.config(); // Load .env variables
 import authRoutes from './routes/authRoutes.js';
+import path from 'path';
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middlewares
 app.use(cors({
   origin: 'http://localhost:5173', 
+  credentials: true,
 }));
 app.use(express.json());
 
@@ -25,6 +28,9 @@ app.use('/api/users', userRoutes);
 //// Import food routes
 import foodRoutes from './routes/foodRoutes.js';
 app.use('/api/foods', foodRoutes);
+
+import cartRoutes from './routes/cartRoutes.js';
+app.use('/api/cart', cartRoutes);
 
 // Import order routes
 import orderRoutes from './routes/orderRoutes.js';
@@ -42,6 +48,14 @@ app.use('/api/customers', customerRoutes);
 import chefRoutes from './routes/chefRoutes.js';
 app.use('/api/chef', chefRoutes);
 
+import cuisinesRoute from './routes/cuisinesRoute.js';
+app.use('/api/cuisines', cuisinesRoute);
+
+import chefs from "./routes/chefs.js";
+app.use("/api/chefs", chefs);
+
+// Serve static files from the React app
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)

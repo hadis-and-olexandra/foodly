@@ -319,7 +319,7 @@ export default function Dashboard() {
                   key={tab.id}
                   className="tab-content text-stone-500 text-sm"
                 >
-                  <p>{tab.content}</p>
+                  <div>{tab.content}</div>
                 </div>
               )
           )}

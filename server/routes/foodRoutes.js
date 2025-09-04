@@ -1,15 +1,22 @@
 import express from 'express';
-import { createFood,getFoods } from '../controllers/foodController.js';
+import { createFood, getFoodsByChef, getFoods,getFoodsByCategory,updateFoodImage, getFoodsByCountry, getChefsByFoodCountry, getFoodDetails } from '../controllers/foodController.js';
 import { authMiddleware, allowRoles } from '../middlewares/authMiddleware.js';
-
-
+import { uploadFoodImage } from '../middlewares/upload.js';
 
 const router = express.Router();
 
 // POST /api/foods
-router.post('/', authMiddleware, allowRoles('chef'), createFood);
+router.post('/', authMiddleware, allowRoles('chef'),uploadFoodImage.single('image'), createFood);
+router.patch('/:id/image',authMiddleware,allowRoles('chef'),uploadFoodImage.single('image'),updateFoodImage);
 // GET /api/foods
 // TODO: add optional query parameters for country
+router.get('/:chefId', getFoodsByChef);
 router.get('/', getFoods);
+
+
+router.get('/category/:category', getFoodsByCategory);
+router.get('/country/:countryName', getFoodsByCountry);
+router.get('/chefs-by-country/:countryName', getChefsByFoodCountry);
+router.get("/details/:id", getFoodDetails);
 
 export default router;

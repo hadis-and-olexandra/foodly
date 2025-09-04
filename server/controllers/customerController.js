@@ -46,13 +46,14 @@ export const getCustomerProfile = async (req, res) => {
 // PUT /api/customers/profile
 export const updateCustomerProfile = async (req, res) => {
   try {
-    const { name, phone, address } = req.body;
+    const { name, email, phone, address } = req.body;
     const user = await User.findById(req.user.id);
     if (!user || user.role !== 'customer') {
       return res.status(404).json({ message: 'Customer not found' });
     }
 
     if (name !== undefined) user.name = name;
+    if (email !== undefined) user.email = email;
     if (phone !== undefined) user.phone = phone;
     if (address !== undefined) user.address = address;
 
@@ -85,15 +86,49 @@ export const changeCustomerPassword = async (req, res) => {
     }
 
     const ok = await bcrypt.compare(currentPassword, user.password);
-    if (!ok) return res.status(400).json({ message: 'Current password is incorrect' });
+    if (!ok) {
+      return res.status(400).json({ message: 'Current password is incorrect' });
+    }
 
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(newPassword, salt);
     await user.save();
 
-    res.json({ message: 'Password updated' });
+    res.json({
+      message: 'Password updated',
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone || '',
+        address: user.address || '',
+        role: user.role,
+      },
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Failed to update password' });
   }
 };
+
+// export const changeCustomerPassword = async (req, res) => {
+//   try {
+//     const { currentPassword, newPassword } = req.body;
+//     const user = await User.findById(req.user.id);
+//     if (!user || user.role !== 'customer') {
+//       return res.status(404).json({ message: 'Customer not found' });
+//     }
+
+//     const ok = await bcrypt.compare(currentPassword, user.password);
+//     if (!ok) return res.status(400).json({ message: 'Current password is incorrect' });
+
+//     const salt = await bcrypt.genSalt(10);
+//     user.password = await bcrypt.hash(newPassword, salt);
+//     await user.save();
+
+//     res.json({ message: 'Password updated' });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: 'Failed to update password' });
+//   }
+// };

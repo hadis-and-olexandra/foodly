@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
+import FoodCatalog from "./pages/FoodCatalog";
 import ChefsCatalog from "./pages/ChefsCatalog";
 import ChefDetails from "./pages/ChefDetails";
 import DishDetails from "./pages/DishDetails";
@@ -29,9 +30,11 @@ function App() {
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/signup" element={<SignUpPage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/chefs" element={<ChefsCatalog />}></Route>
+            {/* <Route path="/chef-catalog" element={<ChefsCatalog />}></Route> */}
+            <Route path="/cuisines/:cuisineId" element={<ChefsCatalog />} />
+            <Route path="/food-catalog" element={<FoodCatalog />}></Route>
             <Route path="/chefs/:chefId" element={<ChefDetails />}></Route>
-            <Route path="/dishes/:dishId" element={<DishDetails />}></Route>
+            <Route path="/dishes/:id" element={<DishDetails />}></Route>
             <Route
               path="/checkout"
               element={
@@ -49,14 +52,14 @@ function App() {
                 </ProtectedRoute>
               }
             ></Route>
-            <Route
+            {/* <Route
               path="/customer/settings"
               element={
                 <ProtectedRoute allowedRoles={["customer"]}>
                   <SettingsCustomer />
                 </ProtectedRoute>
               }
-            ></Route>
+            ></Route> */}
             <Route
               path="/chef/dashboard"
               element={
@@ -65,30 +68,30 @@ function App() {
                 </ProtectedRoute>
               }
             ></Route>
-            <Route
+            {/* <Route
               path="/chef/addDish"
               element={
                 <ProtectedRoute allowedRoles={["chef"]}>
                   <AddDish />
                 </ProtectedRoute>
               }
-            ></Route>
-            <Route
+            ></Route> */}
+            {/* <Route
               path="/chef/orders"
               element={
                 <ProtectedRoute allowedRoles={["chef"]}>
                   <OrdersChef />
                 </ProtectedRoute>
               }
-            ></Route>
-            <Route
+            ></Route> */}
+            {/* <Route
               path="/chef/settings"
               element={
                 <ProtectedRoute allowedRoles={["chef"]}>
                   <SettingsChef />
                 </ProtectedRoute>
               }
-            ></Route>
+            ></Route> */}
 
             <Route path="*" element={<NotFound />} />
           </Routes>

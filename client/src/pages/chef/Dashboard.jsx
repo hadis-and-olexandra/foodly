@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DashboardChef from "./DashboardChef";
+import AddDish from "./AddDish";
 import SettingsChef from "./SettingsChef";
 import OrdersChef from "./OrdersChef";
 
@@ -52,7 +53,7 @@ export default function Dashboard() {
     {
       id: "addNewDish",
       label: "Add a New Dish",
-      content: "Add dish",
+      content: <AddDish />,
     },
     {
       id: "profile",
@@ -133,7 +134,7 @@ export default function Dashboard() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 text-sm py-2 px-4 transition-all duration-300 rounded-md mr-1 ${
+              className={`flex items-center gap-2 text-sm py-2 px-4 transition-all duration-300 rounded-md mr-1 cursor-pointer ${
                 activeTab === tab.id
                   ? "text-stone-800 font-medium bg-white shadow-sm"
                   : "text-stone-800 hover:bg-white/50"
@@ -153,7 +154,7 @@ export default function Dashboard() {
                   key={tab.id}
                   className="tab-content text-stone-500 text-sm"
                 >
-                  <p>{tab.content}</p>
+                  <div>{tab.content}</div>
                 </div>
               )
           )}

@@ -1,131 +1,502 @@
 // all chefs with filters
 
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
-const tabs = [
-  {
-    id: "tab1",
-    label: "Italy",
-    images: [
-      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
-      "https://images.unsplash.com/photo-1518623489648-a173ef7824f3",
-      "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
-      "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
-      "https://material-taillwind-pro-ct-tailwind-team.vercel.app/img/content2.jpg",
-      "https://images.unsplash.com/photo-1620064916958-605375619af8",
-      "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9",
-      "https://images.unsplash.com/photo-1432462770865-65b70566d673",
-      "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1",
-    ],
-  },
-  {
-    id: "tab2",
-    label: "France",
-    images: [
-      "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9",
-      "https://images.unsplash.com/photo-1432462770865-65b70566d673",
-      "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1",
-      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
-      "https://images.unsplash.com/photo-1518623489648-a173ef7824f3",
-      "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
-      "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
-      "https://material-taillwind-pro-ct-tailwind-team.vercel.app/img/content2.jpg",
-      "https://images.unsplash.com/photo-1620064916958-605375619af8",
-    ],
-  },
-  {
-    id: "tab3",
-    label: "Japan",
-    images: [
-      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
-      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
-      "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
-      "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
-      "https://material-taillwind-pro-ct-tailwind-team.vercel.app/img/content2.jpg",
-      "https://images.unsplash.com/photo-1620064916958-605375619af8",
-      "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9",
-      "https://images.unsplash.com/photo-1432462770865-65b70566d673",
-      "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1",
-    ],
-  },
-];
+// const tabs = [
+//   {
+//     id: "tab1",
+//     label: "Italy",
+//     images: [
+//       "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
+//       "https://images.unsplash.com/photo-1518623489648-a173ef7824f3",
+//       "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
+//       "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
+//       "https://material-taillwind-pro-ct-tailwind-team.vercel.app/img/content2.jpg",
+//       "https://images.unsplash.com/photo-1620064916958-605375619af8",
+//       "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9",
+//       "https://images.unsplash.com/photo-1432462770865-65b70566d673",
+//       "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1",
+//     ],
+//   },
+//   {
+//     id: "tab2",
+//     label: "France",
+//     images: [
+//       "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9",
+//       "https://images.unsplash.com/photo-1432462770865-65b70566d673",
+//       "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1",
+//       "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
+//       "https://images.unsplash.com/photo-1518623489648-a173ef7824f3",
+//       "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
+//       "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
+//       "https://material-taillwind-pro-ct-tailwind-team.vercel.app/img/content2.jpg",
+//       "https://images.unsplash.com/photo-1620064916958-605375619af8",
+//     ],
+//   },
+//   {
+//     id: "tab3",
+//     label: "Japan",
+//     images: [
+//       "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
+//       "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
+//       "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
+//       "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
+//       "https://material-taillwind-pro-ct-tailwind-team.vercel.app/img/content2.jpg",
+//       "https://images.unsplash.com/photo-1620064916958-605375619af8",
+//       "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9",
+//       "https://images.unsplash.com/photo-1432462770865-65b70566d673",
+//       "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1",
+//     ],
+//   },
+// ];
+
+// export default function ChefsCatalog() {
+//   const [activeTab, setActiveTab] = useState(tabs[0].id);
+
+//   return (
+//     <div className="max-w-6xl mx-auto px-6 flex flex-col gap-6">
+//       {/* Форма по центру зверху */}
+//       <form
+//         action="#"
+//         className="flex w-full max-w-sm mx-auto items-center justify-center gap-2"
+//       >
+//         <div className="relative w-full">
+//           <input
+//             placeholder="Search sellers by name..."
+//             type="text"
+//             className="w-full aria-disabled:cursor-not-allowed outline-none focus:outline-none text-stone-800 placeholder:text-stone-600/60 ring-transparent border border-stone-200 transition-all ease-in disabled:opacity-50 disabled:pointer-events-none select-none text-sm py-2 px-2.5 ring shadow-sm bg-white rounded-lg duration-100 hover:border-stone-300 hover:ring-none focus:border-stone-400 focus:ring-none peer"
+//           />
+//         </div>
+//         <button
+//           type="submit"
+//           className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased"
+//         >
+//           Search
+//         </button>
+//       </form>
+
+//       {/* Таби з картинками */}
+//       <div className="flex gap-6">
+//         {/* Ліва панель навігації */}
+//         <div className="flex flex-col bg-stone-100 rounded-lg p-2 w-48 shrink-0">
+//           {tabs.map((tab) => (
+//             <button
+//               key={tab.id}
+//               onClick={() => setActiveTab(tab.id)}
+//               className={`py-2 px-4 mb-1 rounded-md text-left transition-all duration-300 ${
+//                 activeTab === tab.id
+//                   ? "bg-white shadow font-semibold"
+//                   : "hover:bg-stone-200"
+//               }`}
+//             >
+//               {tab.label}
+//             </button>
+//           ))}
+//         </div>
+
+//         {/* Контент праворуч */}
+//         <div className="flex-1">
+//           {tabs.map((tab) => (
+//             <div
+//               key={tab.id}
+//               className={`${
+//                 activeTab === tab.id ? "grid" : "hidden"
+//               } grid-cols-3 gap-4`}
+//             >
+//               {tab.images.slice(0, 9).map((src, i) => (
+//                 <div key={i} className="relative group">
+//                   <img
+//                     className="h-40 w-full rounded-lg object-cover object-center"
+//                     src={src}
+//                     alt="image"
+//                   />
+//                   {/* Твой шаблон заголовка */}
+//                   <div className="max-w-sm bg-black/20 backdrop-blur-sm border border-white/50 rounded-lg shadow-[inset_0_1px_0px_rgba(255,255,255,0.75),0_0_9px_rgba(0,0,0,0.2),0_3px_8px_rgba(0,0,0,0.15)] p-4 text-white absolute bottom-2 left-1/2 -translate-x-1/2 z-10">
+//                     <div className="relative z-10">
+//                       <div className="flex items-start gap-3">
+//                         <div className="flex-1 min-w-0 text-center">
+//                           <h4 className="text-sm font-medium mb-1">
+//                             Organization Name
+//                           </h4>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// import React, { useState, useEffect } from "react";
+// import api from "../api"; // твій axios інстанс
+
+// export default function ChefsCatalog() {
+//   const [tabs, setTabs] = useState([]);
+//   const [activeTab, setActiveTab] = useState(null);
+//   const [chefs, setChefs] = useState([]);
+
+//   // Завантажуємо список кухонь
+//   useEffect(() => {
+//     api.get("/cuisines").then((res) => {
+//       setTabs(res.data);
+//       if (res.data.length > 0) {
+//         setActiveTab(res.data[0].id);
+//       }
+//     });
+//   }, []);
+
+//   // Завантажуємо шефів для активної кухні
+//   useEffect(() => {
+//     if (!activeTab) return;
+//     api.get(`/chefs?cuisineId=${activeTab}`).then((res) => {
+//       setChefs(res.data);
+//     });
+//   }, [activeTab]);
+
+//   return (
+//     <div className="max-w-6xl mx-auto px-6 flex flex-col gap-6">
+//       {/* Форма пошуку */}
+//       <form
+//         action="#"
+//         className="flex w-full max-w-sm mx-auto items-center justify-center gap-2"
+//       >
+//         <input
+//           placeholder="Search sellers by name..."
+//           type="text"
+//           className="w-full border rounded-lg px-2.5 py-2 text-sm"
+//         />
+//         <button
+//           type="submit"
+//           className="inline-flex items-center justify-center cursor-pointer font-medium text-sm px-3 py-1.5 rounded-lg border border-stone-900 bg-stone-800 text-stone-50 hover:bg-stone-700 transition-colors"
+//         >
+//           Search
+//         </button>
+//       </form>
+
+//       {/* Основний контент */}
+//       <div className="flex gap-6">
+//         {/* Ліва панель */}
+//         <div className="flex flex-col bg-stone-100 rounded-lg p-2 w-48 shrink-0">
+//           {tabs.map((tab) => (
+//             <button
+//               key={tab.id}
+//               onClick={() => setActiveTab(tab.id)}
+//               className={`py-2 px-4 mb-1 rounded-md text-left transition-all duration-300 ${
+//                 activeTab === tab.id
+//                   ? "bg-white shadow font-semibold"
+//                   : "hover:bg-stone-200"
+//               }`}
+//             >
+//               {tab.label}
+//             </button>
+//           ))}
+//         </div>
+
+//         {/* Список шефів */}
+//         <div className="flex-1 grid grid-cols-3 gap-4">
+//           {chefs.map((chef) => (
+//             <div key={chef.id} className="relative group">
+//               <img
+//                 className="h-40 w-full rounded-lg object-cover"
+//                 src={chef.image}
+//                 alt={chef.name}
+//               />
+//               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/20 backdrop-blur-sm border border-white/50 rounded-lg p-4 text-white text-center">
+//                 <h4 className="text-sm font-medium">{chef.name}</h4>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// import React, { useState, useEffect } from "react";
+
+// // Мок-дані бекенду
+// const mockCuisines = [
+//   { id: "1", label: "Italy" },
+//   { id: "2", label: "France" },
+//   { id: "3", label: "Japan" },
+// ];
+
+// const mockChefs = {
+//   1: [
+//     {
+//       id: "it1",
+//       name: "Chef Luigi",
+//       image: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
+//     },
+//     {
+//       id: "it2",
+//       name: "Chef Maria",
+//       image: "https://images.unsplash.com/photo-1518623489648-a173ef7824f3",
+//     },
+//     {
+//       id: "it3",
+//       name: "Chef Giovanni",
+//       image: "https://images.unsplash.com/photo-1682407186023-12c70a4a35e0",
+//     },
+//   ],
+//   2: [
+//     {
+//       id: "fr1",
+//       name: "Chef Pierre",
+//       image: "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9",
+//     },
+//     {
+//       id: "fr2",
+//       name: "Chef Amélie",
+//       image: "https://images.unsplash.com/photo-1432462770865-65b70566d673",
+//     },
+//     {
+//       id: "fr3",
+//       name: "Chef Luc",
+//       image: "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1",
+//     },
+//   ],
+//   3: [
+//     {
+//       id: "jp1",
+//       name: "Chef Haruto",
+//       image: "https://images.unsplash.com/photo-1620064916958-605375619af8",
+//     },
+//     {
+//       id: "jp2",
+//       name: "Chef Aiko",
+//       image: "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9",
+//     },
+//     {
+//       id: "jp3",
+//       name: "Chef Ren",
+//       image: "https://images.unsplash.com/photo-1432462770865-65b70566d673",
+//     },
+//   ],
+// };
+
+// // Мок API
+// const api = {
+//   getCuisines: () =>
+//     new Promise((resolve) => {
+//       setTimeout(() => resolve(mockCuisines), 500);
+//     }),
+//   getChefs: (cuisineId) =>
+//     new Promise((resolve) => {
+//       setTimeout(() => resolve(mockChefs[cuisineId] || []), 500);
+//     }),
+// };
+
+// export default function ChefsCatalog() {
+//   const [tabs, setTabs] = useState([]);
+//   const [activeTab, setActiveTab] = useState(null);
+//   const [chefs, setChefs] = useState([]);
+//   const [loading, setLoading] = useState(false);
+
+//   // Завантажуємо кухні
+//   useEffect(() => {
+//     api.getCuisines().then((data) => {
+//       setTabs(data);
+//       if (data.length > 0) {
+//         setActiveTab(data[0].id);
+//       }
+//     });
+//   }, []);
+
+//   // Завантажуємо шефів при зміні табу
+//   useEffect(() => {
+//     if (!activeTab) return;
+//     setLoading(true);
+//     api.getChefs(activeTab).then((data) => {
+//       setChefs(data);
+//       setLoading(false);
+//     });
+//   }, [activeTab]);
+
+//   return (
+//     <div className="max-w-6xl mx-auto px-6 flex flex-col gap-6">
+//       {/* Пошук */}
+//       <form
+//         onSubmit={(e) => e.preventDefault()}
+//         className="flex w-full max-w-sm mx-auto items-center justify-center gap-2"
+//       >
+//         <input
+//           placeholder="Search sellers by name..."
+//           type="text"
+//           className="w-full border rounded-lg px-2.5 py-2 text-sm"
+//         />
+//         <button
+//           type="submit"
+//           className="inline-flex items-center justify-center cursor-pointer font-medium text-sm px-3 py-1.5 rounded-lg border border-stone-900 bg-stone-800 text-stone-50 hover:bg-stone-700 transition-colors"
+//         >
+//           Search
+//         </button>
+//       </form>
+
+//       <div className="flex gap-6">
+//         {/* Таби */}
+//         <div className="flex flex-col bg-stone-100 rounded-lg p-2 w-48 shrink-0">
+//           {tabs.map((tab) => (
+//             <button
+//               key={tab.id}
+//               onClick={() => setActiveTab(tab.id)}
+//               className={`py-2 px-4 mb-1 rounded-md text-left transition-all duration-300 ${
+//                 activeTab === tab.id
+//                   ? "bg-white shadow font-semibold"
+//                   : "hover:bg-stone-200"
+//               }`}
+//             >
+//               {tab.label}
+//             </button>
+//           ))}
+//         </div>
+
+//         {/* Контент */}
+//         <div className="flex-1 grid grid-cols-3 gap-4">
+//           {loading ? (
+//             <p className="col-span-3 text-center text-stone-500">Loading...</p>
+//           ) : chefs.length > 0 ? (
+//             chefs.map((chef) => (
+//               <div key={chef.id} className="relative group">
+//                 <img
+//                   className="h-40 w-full rounded-lg object-cover"
+//                   src={chef.image}
+//                   alt={chef.name}
+//                 />
+//                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/20 backdrop-blur-sm border border-white/50 rounded-lg p-4 text-white text-center">
+//                   <h4 className="text-sm font-medium">{chef.name}</h4>
+//                 </div>
+//               </div>
+//             ))
+//           ) : (
+//             <p className="col-span-3 text-center text-stone-500">
+//               No chefs found
+//             </p>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import api from "../services/api";
+import placeholderChef from "../assets/Kitchen interior with desk in the front background | Premium AI-generated image.jpg";
 
 export default function ChefsCatalog() {
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
+  const { cuisineId } = useParams();
+  const navigate = useNavigate();
+
+  const [cuisines, setCuisines] = useState([]);
+  const [activeTab, setActiveTab] = useState(null);
+  const [chefs, setChefs] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Load cuisines
+  useEffect(() => {
+    api
+      .get("/cuisines")
+      .then((res) => {
+        setCuisines(res.data);
+
+        // if cuisineId in URL → select it, else default = first cuisine
+        if (cuisineId) {
+          setActiveTab(cuisineId);
+        } else if (res.data.length > 0) {
+          setActiveTab(res.data[0]._id);
+          navigate(`/cuisines/${res.data[0]._id}`, {
+            replace: true,
+          });
+        }
+      })
+      .catch((err) => console.error(err));
+  }, [cuisineId, navigate]);
+
+  // Load chefs for active cuisine
+  useEffect(() => {
+    if (!activeTab) return;
+    setLoading(true);
+    api
+      .get(`/chefs?cuisineId=${activeTab}`)
+      .then((res) => setChefs(res.data))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, [activeTab]);
 
   return (
     <div className="max-w-6xl mx-auto px-6 flex flex-col gap-6">
-      {/* Форма по центру зверху */}
+      {/* Search */}
       <form
-        action="#"
+        onSubmit={(e) => e.preventDefault()}
         className="flex w-full max-w-sm mx-auto items-center justify-center gap-2"
       >
-        <div className="relative w-full">
-          <input
-            placeholder="Search sellers by name..."
-            type="text"
-            className="w-full aria-disabled:cursor-not-allowed outline-none focus:outline-none text-stone-800 placeholder:text-stone-600/60 ring-transparent border border-stone-200 transition-all ease-in disabled:opacity-50 disabled:pointer-events-none select-none text-sm py-2 px-2.5 ring shadow-sm bg-white rounded-lg duration-100 hover:border-stone-300 hover:ring-none focus:border-stone-400 focus:ring-none peer"
-          />
-        </div>
+        <input
+          placeholder="Search chefs by name..."
+          type="text"
+          className="w-full border rounded-lg px-2.5 py-2 text-sm"
+        />
         <button
           type="submit"
-          className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm hover:shadow-md bg-stone-800 hover:bg-stone-700 relative bg-gradient-to-b from-stone-700 to-stone-800 border-stone-900 text-stone-50 rounded-lg hover:bg-gradient-to-b hover:from-stone-800 hover:to-stone-800 hover:border-stone-900 after:absolute after:inset-0 after:rounded-[inherit] after:box-shadow after:shadow-[inset_0_1px_0px_rgba(255,255,255,0.25),inset_0_-2px_0px_rgba(0,0,0,0.35)] after:pointer-events-none transition antialiased"
+          className="inline-flex items-center justify-center cursor-pointer font-medium text-sm px-3 py-1.5 rounded-lg border border-stone-900 bg-stone-800 text-stone-50 hover:bg-stone-700 transition-colors"
         >
           Search
         </button>
       </form>
 
-      {/* Таби з картинками */}
       <div className="flex gap-6">
-        {/* Ліва панель навігації */}
+        {/* Tabs (cuisines list) */}
         <div className="flex flex-col bg-stone-100 rounded-lg p-2 w-48 shrink-0">
-          {tabs.map((tab) => (
+          {cuisines.map((cuisine) => (
             <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              key={cuisine._id}
+              onClick={() => {
+                setActiveTab(cuisine._id);
+                navigate(`/cuisines/${cuisine._id}`);
+              }}
               className={`py-2 px-4 mb-1 rounded-md text-left transition-all duration-300 ${
-                activeTab === tab.id
+                activeTab === cuisine._id
                   ? "bg-white shadow font-semibold"
                   : "hover:bg-stone-200"
               }`}
             >
-              {tab.label}
+              {cuisine.name}
             </button>
           ))}
         </div>
 
-        {/* Контент праворуч */}
-        <div className="flex-1">
-          {tabs.map((tab) => (
-            <div
-              key={tab.id}
-              className={`${
-                activeTab === tab.id ? "grid" : "hidden"
-              } grid-cols-3 gap-4`}
-            >
-              {tab.images.slice(0, 9).map((src, i) => (
-                <div key={i} className="relative group">
-                  <img
-                    className="h-40 w-full rounded-lg object-cover object-center"
-                    src={src}
-                    alt="image"
-                  />
-                  {/* Твой шаблон заголовка */}
-                  <div className="max-w-sm bg-black/20 backdrop-blur-sm border border-white/50 rounded-lg shadow-[inset_0_1px_0px_rgba(255,255,255,0.75),0_0_9px_rgba(0,0,0,0.2),0_3px_8px_rgba(0,0,0,0.15)] p-4 text-white absolute bottom-2 left-1/2 -translate-x-1/2 z-10">
-                    <div className="relative z-10">
-                      <div className="flex items-start gap-3">
-                        <div className="flex-1 min-w-0 text-center">
-                          <h4 className="text-sm font-medium mb-1">
-                            Organization Name
-                          </h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+        {/* Chefs list */}
+        <div className="flex-1 grid grid-cols-3 gap-4">
+          {loading ? (
+            <p className="col-span-3 text-center text-stone-500">Loading...</p>
+          ) : chefs.length > 0 ? (
+            chefs.map((chef) => (
+              <div
+                key={chef._id}
+                className="relative group cursor-pointer"
+                onClick={() => navigate(`/chefs/${chef._id}`)}
+              >
+                <img
+                  className="h-40 w-full rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
+                  // src={chef.image}
+                  src={chef.image?.trim() || placeholderChef}
+                  alt={chef.name}
+                />
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/40 backdrop-blur-sm border border-white/40 rounded-lg px-3 py-2 text-white text-center transition duration-300 group-hover:bg-black/60">
+                  <h4 className="text-sm font-medium">{chef.name}</h4>
                 </div>
-              ))}
-            </div>
-          ))}
+              </div>
+            ))
+          ) : (
+            <p className="col-span-3 text-center text-stone-500">
+              No chefs found
+            </p>
+          )}
         </div>
       </div>
     </div>
